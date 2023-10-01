@@ -13,25 +13,32 @@ import java.util.List;
 
 @Service
 @Data
-//@AllArgsConstructor
+// @AllArgsConstructor
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-    public void saveUser(UserRegisterModel user){
+
+    public void saveUser(UserRegisterModel user) {
         userRepository.save(user);
     }
-    public Collection<UserRegisterModel> getAllUsers(){
+
+    public Collection<UserRegisterModel> getAllUsers() {
+        String s = "";
         return Streamable.of(userRepository.findAll()).toList();
     }
-    public void deleteUser(long id){
+
+    public void deleteUser(long id) {
         userRepository.deleteById(id);
     }
-    public List<UserRegisterModel> searchUserById(long id){
+
+    public List<UserRegisterModel> searchUserById(long id) {
         return userRepository.findById(id).stream().toList();
     }
-    public boolean userLoginService(UserLoginModel userLoginModel){
-        UserRegisterModel userRegisterModel = userRepository.findUserRegisterModelByUsername(userLoginModel.getUsername());
-        if(userRegisterModel.getPassword().equals(userLoginModel.getPassword())){
+
+    public boolean userLoginService(UserLoginModel userLoginModel) {
+        UserRegisterModel userRegisterModel = userRepository
+                .findUserRegisterModelByUsername(userLoginModel.getUsername());
+        if (userRegisterModel.getPassword().equals(userLoginModel.getPassword())) {
             return true;
         }
         return false;

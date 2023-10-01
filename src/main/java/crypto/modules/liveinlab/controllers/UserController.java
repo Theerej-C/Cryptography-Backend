@@ -14,20 +14,24 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
     @PostMapping("/save")
-    public ResponseEntity<String> userRegister(@RequestBody UserRegisterModel userRegisterModel){
+    public ResponseEntity<String> userRegister(@RequestBody UserRegisterModel userRegisterModel) {
         userService.saveUser(userRegisterModel);
         return ResponseEntity.ok("This is he testing one");
     }
+
     @PostMapping("/login")
-    public ResponseEntity<Boolean> userLogin(@RequestBody UserLoginModel userLoginModel){
-        if(userService.userLoginService(userLoginModel)){
+    public ResponseEntity<Boolean> userLogin(@RequestBody UserLoginModel userLoginModel) {
+        if (userService.userLoginService(userLoginModel)) {
             return ResponseEntity.ok(Boolean.TRUE);
+
         }
         return ResponseEntity.ok(Boolean.FALSE);
     }
+
     @GetMapping("/test")
-    public String test(){
+    public String test() {
         return "test";
     }
 }
